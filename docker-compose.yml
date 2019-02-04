@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  reverseproxy:
+    image: reverseproxy
+    ports:
+      - 8080:8080
+    restart: always
+  jenkins:
+    depends_on:
+      - reverseproxy
+    ports:
+      - 8082:8080
+    image: jenkins/jenkins
+    restart: always
+  
