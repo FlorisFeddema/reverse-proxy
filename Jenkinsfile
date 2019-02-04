@@ -7,8 +7,8 @@ pipeline {
   stages {
     stage('Verify Tools') {
       steps {
-        sh 'docker --version'
         sh 'which docker'
+        sh 'docker --version'
       }
     }
     stage('Deploy') {
