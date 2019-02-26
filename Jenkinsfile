@@ -7,18 +7,17 @@ pipeline {
   stages {
     stage('Verify Tools') {
       steps {
-        sh 'which docker'
-        sh 'docker --version'
+        sh 'docker-compose --version'
+        sh 'which docker-compose'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'docker build -t reverseproxy .'
-        sh 'docker rm -f reverseproxy || true'
-        sh 'docker-compose up -d'
-        sh 'docker image prune -f'
+        sh 'docker-compose up -d --force-recreate'
+        sh 'cp docker-complse.yml /home/floris/dev/docker-compose.yml'
       }
     }
+
   }
   post {
     always {
