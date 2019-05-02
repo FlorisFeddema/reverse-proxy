@@ -19,7 +19,6 @@ pipeline {
         sh 'docker-compose up -p reverseproxy -d'
       }
     }
-
   }
   post {
     always {
