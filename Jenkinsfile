@@ -13,9 +13,10 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'docker rm -f reverse_proxy || true'
-        sh 'docker-compose up -d --force-recreate'
-        sh 'cp docker-compose.yml /home/floris/dev/docker-compose.yml'
+        sh 'cp docker-compose.yml /home/floris/dev/reverseproxy/docker-compose.yml'
+        sh 'cd /home/floris/dev/reverseproxy/'
+        sh 'docker-compose down -p reverseproxy'
+        sh 'docker-compose up -p reverseproxy -d'
       }
     }
 
