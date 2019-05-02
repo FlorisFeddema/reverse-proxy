@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh 'cp docker-compose.yml /home/jenkins/dev/reverseproxy/docker-compose.yml'
         sh 'cd /home/jenkins/dev/reverseproxy/'
-        sh 'docker-compose down -p reverseproxy'
+        sh 'docker-compose down -p reverseproxy || true'
         sh 'docker-compose up -p reverseproxy -d'
       }
     }
