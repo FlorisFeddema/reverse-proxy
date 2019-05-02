@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
       - 443:443
-    restart: always # Set restart policy
+    restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf # Pass nginx config file
       - /etc/letsencrypt/:/etc/letsencrypt/ # Pass letsencrypt keys
