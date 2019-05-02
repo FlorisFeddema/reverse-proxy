@@ -14,9 +14,10 @@ pipeline {
     stage('Deploy') {
       steps {
         sh 'cp docker-compose.yml /home/jenkins/dev/reverseproxy/docker-compose.yml'
+        sh 'cp Dockerfile /home/jenkins/dev/reverseproxy/Dockerfile'
         sh 'cd /home/jenkins/dev/reverseproxy/'
-        sh 'docker-compose down -p reverseproxy || true'
-        sh 'docker-compose up -p reverseproxy -d'
+        sh 'docker-compose -p reverseproxy down || true'
+        sh 'docker-compose -p reverseproxy up -d'
       }
     }
   }
