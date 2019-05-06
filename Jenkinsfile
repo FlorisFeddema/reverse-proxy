@@ -14,6 +14,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh 'cp docker-compose.yml /home/jenkins/dev/reverseproxy/docker-compose.yml'
+        sh 'cp nginx.conf /home/jenkins/dev/reverseproxy/nginx.conf'
         sh 'cp Dockerfile /home/jenkins/dev/reverseproxy/Dockerfile'
         sh 'cd /home/jenkins/dev/reverseproxy/'
         sh 'docker-compose -p reverseproxy down || true'
