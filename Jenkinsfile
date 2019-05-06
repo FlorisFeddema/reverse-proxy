@@ -17,7 +17,7 @@ pipeline {
         sh 'cp Dockerfile /home/jenkins/dev/reverseproxy/Dockerfile'
         sh 'cd /home/jenkins/dev/reverseproxy/'
         sh 'docker-compose -p reverseproxy down || true'
-        sh 'docker-compose -p reverseproxy up -d'
+        sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
   }
