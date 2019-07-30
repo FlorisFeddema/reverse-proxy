@@ -1,4 +1,2 @@
-FROM nginx:latest
-RUN apt update \
-    && apt install openssl
+FROM nginx:alpine
 ADD ./nginx.conf /etc/nginx/nginx.conf
