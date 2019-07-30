@@ -2,7 +2,7 @@ version: '3.6'
 services:
   reverse-proxy:
     build: . # build the container
-    image: reverse-proxy
+    image: geastro/reverse-proxy
     ports:
       - 80:80
       - 443:443
