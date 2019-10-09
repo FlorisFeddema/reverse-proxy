@@ -13,7 +13,6 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-
         sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
