@@ -1,7 +1,8 @@
 pipeline {
   agent any
   environment {
-            tag = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED,"yy"}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-');
+    tag = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED,"yy"}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-')
+  }
   stages {
     stage('Verify Tools') {
       steps {
