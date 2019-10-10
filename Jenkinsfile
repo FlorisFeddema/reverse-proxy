@@ -1,9 +1,5 @@
 pipeline {
   agent any
-  options {
-    disableConcurrentBuilds()
-    timeout(time: 10, unit: 'MINUTES')
-  }
   stages {
     stage('Verify Tools') {
       steps {
@@ -13,6 +9,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
+        VersionNumber(versionNumberString: '${BUILD_YEAR}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-')
         sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
@@ -20,6 +17,12 @@ pipeline {
   post {
     always {
       cleanWs()
+
     }
+
+  }
+  options {
+    disableConcurrentBuilds()
+    timeout(time: 10, unit: 'MINUTES')
   }
 }
