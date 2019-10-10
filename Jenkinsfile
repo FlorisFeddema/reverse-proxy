@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        set $VERSION=VersionNumber(versionNumberString: '${BUILD_YEAR}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-')
+        VERSION = VersionNumber(versionNumberString: '${BUILD_YEAR}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-')
         sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
