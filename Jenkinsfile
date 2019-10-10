@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'echo $TAG;
+        sh 'echo $TAG'
         sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
