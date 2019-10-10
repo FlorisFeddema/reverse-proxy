@@ -1,5 +1,7 @@
 pipeline {
   agent any
+  environment {
+            tag = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED,"yy"}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-');
   stages {
     stage('Verify Tools') {
       steps {
@@ -9,8 +11,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED,"yy"}.${BUILDS_THIS_YEAR}', versionPrefix: 'develop-')
-        sh 'echo $VersionNumber;
+        sh 'echo $TAG;
         sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
