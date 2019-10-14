@@ -15,10 +15,10 @@ pipeline {
     stage('Deploy') {
       steps {
         sh 'echo "version: $TAG"'
-        sh 'docker build -t reverse-proxy:$TAG .'
+        // sh 'docker build -t reverse-proxy:$TAG .'
         // sh 'docker tag reverse-proxy:$TAG docker.feddema.dev/reverse-proxy:$TAG'
         // sh 'docker push docker.feddema.dev/reverse-proxy:$TAG'
-        sh 'docker-compose -p reverseproxy up -d --force-recreate'
+        sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
       }
     }
   }
