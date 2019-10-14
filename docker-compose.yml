@@ -1,8 +1,7 @@
 version: '3.6'
 services:
   reverse-proxy:
-    build: . # build the container
-    image: reverse-proxy
+    image: docker.feddema.dev/reverse-proxy:latest
     ports:
       - 80:80
       - 443:443

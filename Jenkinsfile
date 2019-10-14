@@ -8,12 +8,17 @@ pipeline {
       steps {
         sh 'docker-compose --version'
         sh 'which docker-compose'
+        sh 'docker --version'
+        sh 'which docker'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'echo "$TAG"'
-        sh 'docker-compose -p reverseproxy up -d --force-recreate --build'
+        sh 'echo "version: $TAG"'
+        sh 'docker build .'
+        sh 'docker tag reverse-proxy:$TAG docker.feddema.dev/reverse-proxy'
+        sh 'docker push docker.feddema.dev/reverse-proxy'
+        sh 'docker-compose -p reverseproxy up -d --force-recreate'
       }
     }
   }
