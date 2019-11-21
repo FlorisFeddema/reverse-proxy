@@ -13,6 +13,9 @@ pipeline {
       }
     }
     stage('Deploy') {
+      when {
+        brach 'master'
+      }
       steps {
         sh 'echo "version: $TAG"'
         sh 'docker build -t reverse-proxy:$TAG .'
