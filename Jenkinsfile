@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Deploy') {
       when {
-        brach 'master'
+        branch 'master'
       }
       steps {
         sh 'echo "version: $TAG"'
