@@ -4,7 +4,6 @@ services:
     build: .
     image: reverse-proxy
     # image: docker.feddema.dev/reverse-proxy:latest
-
     ports:
       - 80:80
       - 443:443
@@ -13,4 +12,9 @@ services:
       #- ./nginx.conf:/etc/nginx/nginx.conf # Pass nginx config file
       - /root/.acme.sh/:/etc/ssl/ # Pass letsencrypt keys
     container_name: reverse-proxy # Set container name
+    networks: 
+      - reverseproxynet
     
+networks: 
+  reverseproxynet:
+    drive: bridge
