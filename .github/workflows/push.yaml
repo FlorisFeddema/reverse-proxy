@@ -34,8 +34,8 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/florifeddema/reverse-proxy:${{ github.sha }}
-            ghcr.io/florifeddema/reverse-proxy:latest
+            ghcr.io/florisfeddema/reverse-proxy:${{ github.sha }}
+            ghcr.io/florisfeddema/reverse-proxy:latest
           context: .
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
