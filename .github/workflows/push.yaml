@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  TARGET_DIRECTORY: /opt/compose/reverse-proxy
+
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -40,8 +43,33 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
-  # deploy:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - name: Checkout git
-  #       uses: actions/checkout@v2
+  deploy:
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout git
+        uses: actions/checkout@v2
+
+      - name: Copy container configurations
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: docker-compose.yml
+          target: ${{ env.TARGET_DIRECTORY }}
+          strip_components: 1
+          rm: true
+
+      - name: Start containers
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ env.TARGET_DIRECTORY }}
+            echo 'TAG=${{ github.sha }}' >> .env
+            docker-compose -f docker-compose.yml up -dz``

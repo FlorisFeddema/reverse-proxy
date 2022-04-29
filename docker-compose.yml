@@ -1,9 +1,7 @@
 version: '3.6'
 services:
   reverse-proxy:
-    build: .
-    image: reverse-proxy
-    # image: docker.feddema.dev/reverse-proxy:latest
+    image: ghcr.io/florisfeddema/reverse-proxy:$TAG
     ports:
       - 80:80
       - 443:443
