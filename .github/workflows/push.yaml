@@ -72,4 +72,4 @@ jobs:
           script: |
             cd ${{ env.TARGET_DIRECTORY }}
             echo 'TAG=${{ github.sha }}' >> .env
-            docker-compose -f docker-compose.yml up -dz``
+            docker-compose -f docker-compose.yml up -d
