@@ -57,10 +57,10 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: docker-compose.yml
-          target: ${{ env.TARGET_DIRECTORY }}
+          source: docker-compose.yaml
+          target: ${{ env.TARGET_DIRECTORY }}/docker-compose.yaml
           strip_components: 1
-          rm: true
+          rm: false
 
       - name: Start containers
         uses: appleboy/ssh-action@master
@@ -73,4 +73,4 @@ jobs:
             cd ${{ env.TARGET_DIRECTORY }}
             ls
             echo 'TAG=${{ github.sha }}' >> .env
-            docker-compose -f docker-compose.yml up -d
+            docker-compose -f docker-compose.yaml up -d
