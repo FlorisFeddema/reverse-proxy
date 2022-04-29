@@ -71,5 +71,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ env.TARGET_DIRECTORY }}
+            ls
             echo 'TAG=${{ github.sha }}' >> .env
             docker-compose -f docker-compose.yml up -d
